@@ -39,6 +39,7 @@ dependencies:
   easy_localization: ^3.0.8
   provider: ^6.1.5
   shared_preferences: ^2.5.3
+  http: ^1.5.0
 
 dev_dependencies:
   flutter_test:
