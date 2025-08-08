@@ -1,8 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:news/provider/app_theme_provider.dart';
-import 'package:news/utils/app_theme.dart';
-import 'package:provider/provider.dart';
+import 'package:news/ui/category_details/category_details.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -14,18 +12,11 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    var appThemeProvider = Provider.of<AppThemeProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text(context.tr('home')),
+        title: Text(context.tr('home'),style: Theme.of(context).textTheme.headlineMedium,),
       ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: (){
-            appThemeProvider.changeTheme(ThemeMode.light);
-          }, 
-          child: Text('Theme')),
-      ),
+      body: CategoryDetails(),
     );
   }
 }
