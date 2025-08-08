@@ -14,7 +14,11 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(context.tr('home'),style: Theme.of(context).textTheme.headlineMedium,),
+        
+        title: Text(
+          context.tr('home'),
+          style: Theme.of(context).textTheme.headlineMedium,
+        ),
       ),
       body: CategoryDetails(),
     );

@@ -9,6 +9,7 @@ class AppTheme {
     scaffoldBackgroundColor: AppColors.whiteColor,
     appBarTheme: AppBarTheme(
       backgroundColor: AppColors.whiteColor,
+      surfaceTintColor: AppColors.transparentColor,
       iconTheme: IconThemeData(color: AppColors.blackColor),
       centerTitle: true,
     ),
@@ -28,6 +29,7 @@ class AppTheme {
     scaffoldBackgroundColor: AppColors.blackColor,
     appBarTheme: AppBarTheme(
       backgroundColor: AppColors.blackColor,
+      surfaceTintColor: AppColors.transparentColor,
       iconTheme: IconThemeData(color: AppColors.whiteColor),
       centerTitle: true,
     ),

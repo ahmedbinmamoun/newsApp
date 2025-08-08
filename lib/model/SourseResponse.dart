@@ -1,4 +1,4 @@
-class Sources {
+class Source {
   String? id;
   String? name;
   String? description;
@@ -7,7 +7,7 @@ class Sources {
   String? language;
   String? country;
 
-  Sources({
+  Source({
     this.id,
     this.name,
     this.description,
@@ -17,7 +17,7 @@ class Sources {
     this.country,
   });
 
-  Sources copyWith({
+  Source copyWith({
     String? id,
     String? name,
     String? description,
@@ -25,7 +25,7 @@ class Sources {
     String? category,
     String? language,
     String? country,
-  }) => Sources(
+  }) => Source(
     id: id ?? this.id,
     name: name ?? this.name,
     description: description ?? this.description,
@@ -47,7 +47,7 @@ class Sources {
     return map;
   }
 
-  Sources.fromJson(dynamic json) {
+  Source.fromJson(dynamic json) {
     id = json["id"];
     name = json["name"];
     description = json["description"];
@@ -60,13 +60,13 @@ class Sources {
 
 class SourseResponse {
   String? status;
-  List<Sources>? sourcesList;
+  List<Source>? sourcesList;
   String? code;
   String? message;
 
   SourseResponse({this.status, this.sourcesList, this.code, this.message});
 
-  SourseResponse copyWith({String? status, List<Sources>? sourcesList}) =>
+  SourseResponse copyWith({String? status, List<Source>? sourcesList}) =>
       SourseResponse(
         status: status ?? this.status,
         sourcesList: sourcesList ?? this.sourcesList,
@@ -88,7 +88,7 @@ class SourseResponse {
     if (json["sources"] != null) {
       sourcesList = [];
       json["sources"].forEach((v) {
-        sourcesList?.add(Sources.fromJson(v));
+        sourcesList?.add(Source.fromJson(v));
       });
     }
   }
