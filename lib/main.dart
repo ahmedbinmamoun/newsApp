@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:news/provider/app_language_provider.dart';
+import 'package:news/provider/app_theme_provider.dart';
 import 'package:news/ui/home/home_screen.dart';
 import 'package:news/utils/app_routes.dart';
 import 'package:news/utils/app_theme.dart';
@@ -12,6 +13,8 @@ void main() async{
   await Future.delayed(Duration(milliseconds: 1500));
   final appLanguageProvider = AppLanguageProvider();
   await appLanguageProvider.loadLocale();
+  final appThemeProvider = AppThemeProvider();
+  await appThemeProvider.loadTheme();
   runApp(
     
     EasyLocalization(
@@ -22,6 +25,7 @@ void main() async{
       child: MultiProvider(
         providers: [
           ChangeNotifierProvider.value(value: appLanguageProvider),
+          ChangeNotifierProvider.value(value: appThemeProvider),
         ],
         child: MyApp())
     ),
@@ -35,6 +39,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
    var languageProvider = Provider.of<AppLanguageProvider>(context);
+   var appThemeProvider = Provider.of<AppThemeProvider>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       
@@ -44,7 +49,7 @@ class MyApp extends StatelessWidget {
       },
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
-      themeMode: ThemeMode.dark,
+      themeMode: appThemeProvider.appTheme,
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: Locale(languageProvider.appLanguage),
