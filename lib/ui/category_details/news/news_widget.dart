@@ -14,10 +14,17 @@ class NewsWidget extends StatefulWidget {
 }
 
 class _NewsWidgetState extends State<NewsWidget> {
+  late Future<NewsResponse?> _newsFuture;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _newsFuture = ApiManager.getNewsBySourceId(widget.source.id?? '');
+  }
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<NewsResponse?>(
-      future: ApiManager.getNewsBySourceId(widget.source.id ?? ''),
+      future: _newsFuture = ApiManager.getNewsBySourceId(widget.source.id?? ''),
        builder: (context, snapshot) {
          if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(
