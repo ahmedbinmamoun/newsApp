@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:news/api/api_manager.dart';
 import 'package:news/model/SourseResponse.dart';
+import 'package:news/model/category.dart';
 import 'package:news/ui/category_details/source/source_tab_widget.dart';
 import 'package:news/utils/app_colors.dart';
 
 class CategoryDetails extends StatefulWidget {
-  const CategoryDetails({super.key});
+  Category category;
+   CategoryDetails({super.key, required this.category});
 
   @override
   State<CategoryDetails> createState() => _CategoryDetailsState();
@@ -19,7 +21,7 @@ class _CategoryDetailsState extends State<CategoryDetails> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _sourcesFuture = ApiManager.getSources();
+    _sourcesFuture = ApiManager.getSources(widget.category.id);
   }
   @override
   Widget build(BuildContext context) {
@@ -40,7 +42,7 @@ class _CategoryDetailsState extends State<CategoryDetails> {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    _sourcesFuture = ApiManager.getSources();
+                    _sourcesFuture = ApiManager.getSources(widget.category.id);
                     setState(() {
                       
                     });
@@ -65,7 +67,7 @@ class _CategoryDetailsState extends State<CategoryDetails> {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    _sourcesFuture = ApiManager.getSources();
+                    _sourcesFuture = ApiManager.getSources(widget.category.id);
                     setState(() {
                       
                     });
@@ -82,7 +84,7 @@ class _CategoryDetailsState extends State<CategoryDetails> {
           );
         }
         var sourcesList = snapshot.data?.sourcesList ?? [];
-        return SourceTabWidget(sourcesList:sourcesList,);
+        return SourceTabWidget(sourcesList:sourcesList,category: widget.category,);
       },
     );
   }
