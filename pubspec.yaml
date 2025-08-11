@@ -44,6 +44,7 @@ dependencies:
   timeago: ^3.7.1
   flutter_slider_drawer: ^3.0.2
   dropdown_button2: ^2.3.9
+  anim_search_bar: ^2.0.3
 
 dev_dependencies:
   flutter_test:

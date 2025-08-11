@@ -17,50 +17,52 @@ class CategoryItem extends StatelessWidget {
     var height = MediaQuery.of(context).size.height;
     bool isEven = index % 2 == 0;
     var appLanguageProvider = Provider.of<AppLanguageProvider>(context);
-    return Stack(
-      alignment: isEven ? Alignment.bottomRight : Alignment.bottomLeft,
-      children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(24),
-          child: Image.asset(category.image),
-          
-        ),
-        Container(
-          width: width * 0.4,
-          margin: EdgeInsets.symmetric(
-            horizontal: width * 0.04,
-            vertical: height * 0.02
+    return Expanded(
+      child: Stack(
+        alignment: isEven ? Alignment.bottomRight : Alignment.bottomLeft,
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(24),
+            child: Image.asset(category.image),
+            
           ),
-          padding: isEven ? EdgeInsetsDirectional.only(
-            start:appLanguageProvider.isEnglish() ? width * 0.02 : 0,
-            end: appLanguageProvider.isEnglish() ? 0 : width * 0.02,
-          ) : 
-                  EdgeInsetsDirectional.only(
-            start: !appLanguageProvider.isEnglish() ? width * 0.02 : 0,
-            end: !appLanguageProvider.isEnglish() ? 0 : width * 0.02,
+          Container(
+            width: width * 0.4,
+            margin: EdgeInsets.symmetric(
+              horizontal: width * 0.04,
+              vertical: height * 0.02
+            ),
+            padding: isEven ? EdgeInsetsDirectional.only(
+              start:appLanguageProvider.isEnglish() ? width * 0.02 : 0,
+              end: appLanguageProvider.isEnglish() ? 0 : width * 0.02,
+            ) : 
+                    EdgeInsetsDirectional.only(
+              start: !appLanguageProvider.isEnglish() ? width * 0.02 : 0,
+              end: !appLanguageProvider.isEnglish() ? 0 : width * 0.02,
+            ),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(84),
+              color: AppColors.greyColor,
+            ),
+            child: Row(
+              textDirection: isEven ? ui.TextDirection.ltr : ui.TextDirection.rtl,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(context.tr('view_all'),style: Theme.of(context).textTheme.headlineMedium,),
+                CircleAvatar(
+                  radius: 25,
+                  backgroundColor: Theme.of(context).primaryColor,
+                  child: Icon(
+                    isEven ?
+                    Icons.arrow_forward_ios
+                    :Icons.arrow_back_ios_new,
+                    color: Theme.of(context).indicatorColor,),
+                ),
+              ],
+            ),
           ),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(84),
-            color: AppColors.greyColor,
-          ),
-          child: Row(
-            textDirection: isEven ? ui.TextDirection.ltr : ui.TextDirection.rtl,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(context.tr('view_all'),style: Theme.of(context).textTheme.headlineMedium,),
-              CircleAvatar(
-                radius: 25,
-                backgroundColor: Theme.of(context).primaryColor,
-                child: Icon(
-                  isEven ?
-                  Icons.arrow_forward_ios
-                  :Icons.arrow_back_ios_new,
-                  color: Theme.of(context).indicatorColor,),
-              ),
-            ],
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
