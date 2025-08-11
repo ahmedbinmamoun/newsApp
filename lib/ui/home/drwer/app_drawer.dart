@@ -7,7 +7,8 @@ import 'package:provider/provider.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class AppDrawer extends StatelessWidget {
-  const AppDrawer({super.key});
+  VoidCallback onGotoHomeClick;
+   AppDrawer({super.key, required this.onGotoHomeClick});
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +36,7 @@ class AppDrawer extends StatelessWidget {
               leading:  Image.asset(AppAssests.homeIcon,color: Theme.of(context).indicatorColor),
               title: Text(context.tr('go_to_home'), style: Theme.of(context).textTheme.titleLarge),
               onTap: () {
+                onGotoHomeClick();
                 Navigator.pop(context);
               },
             ),

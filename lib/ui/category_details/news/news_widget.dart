@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:news/api/api_manager.dart';
 import 'package:news/model/NewsResponse.dart';
 import 'package:news/model/SourseResponse.dart';
+import 'package:news/model/category.dart';
 import 'package:news/ui/category_details/news/news_item.dart';
 import 'package:news/utils/app_colors.dart';
 
 class NewsWidget extends StatefulWidget {
   Source source;
+  Category? category;
    NewsWidget({super.key, required this.source});
 
   @override
@@ -24,7 +26,7 @@ class _NewsWidgetState extends State<NewsWidget> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<NewsResponse?>(
-      future: _newsFuture = ApiManager.getNewsBySourceId(widget.source.id?? ''),
+      future: ApiManager.getNewsBySourceId(widget.source.id ?? ''),
        builder: (context, snapshot) {
          if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(
@@ -39,7 +41,7 @@ class _NewsWidgetState extends State<NewsWidget> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  ApiManager.getSources();
+                  ApiManager.getSources(widget.category!.id);
                   setState(() {
                     
                   });
@@ -60,7 +62,7 @@ class _NewsWidgetState extends State<NewsWidget> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  ApiManager.getSources();
+                  ApiManager.getSources(widget.category!.id);
                   setState(() {
                     
                   });
