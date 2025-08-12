@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:news/utils/app_colors.dart';
-import 'package:news/utils/app_styles.dart';
 
 
   typedef OnValidator = String? Function(String?)?;

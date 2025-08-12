@@ -17,6 +17,7 @@ class NewsWidget extends StatefulWidget {
 
 class _NewsWidgetState extends State<NewsWidget> {
   late Future<NewsResponse?> _newsFuture;
+  
   @override
   void initState() {
     // TODO: implement initState

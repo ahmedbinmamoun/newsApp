@@ -18,7 +18,7 @@ class ApiManager {
       var json = jsonDecode(responseBody);
       return SourseResponse.fromJson(json);
     } catch (e) {
-      throw e;
+      rethrow;
     }
   }
 
@@ -33,7 +33,7 @@ class ApiManager {
       var json = jsonDecode(responseBody);
       return NewsResponse.fromJson(json);
     } catch (e) {
-      throw e;
+      rethrow;
     }
   }
 
@@ -48,7 +48,7 @@ class ApiManager {
     var json = jsonDecode(response.body);
     return NewsResponse.fromJson(json);
   } catch (e) {
-    throw e;
+    rethrow;
   }
 }
 }

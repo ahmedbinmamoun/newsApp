@@ -8,7 +8,7 @@ import 'package:news/utils/app_assests.dart';
 class SearchWidget extends StatefulWidget {
   final Function(List<News>) onResultChange;
   final VoidCallback onCancel;
-   SearchWidget({super.key, required this.onResultChange, required this.onCancel});
+   const SearchWidget({super.key, required this.onResultChange, required this.onCancel});
 
   @override
   State<SearchWidget> createState() => _SearchWidgetState();

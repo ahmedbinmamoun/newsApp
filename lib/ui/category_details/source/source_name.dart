@@ -4,7 +4,7 @@ import 'package:news/model/SourseResponse.dart';
 class SourceName extends StatelessWidget {
   Source source;
   bool isSelected;
-  SourceName({required this.source, required this.isSelected});
+  SourceName({super.key, required this.source, required this.isSelected});
 
   @override
   Widget build(BuildContext context) {

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:news/provider/app_language_provider.dart';
 import 'package:news/provider/app_theme_provider.dart';
 import 'package:news/utils/app_assests.dart';
-import 'package:news/utils/app_colors.dart';
 import 'package:provider/provider.dart';
 import 'package:easy_localization/easy_localization.dart';
 

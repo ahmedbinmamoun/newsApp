@@ -84,7 +84,7 @@ class _CategoryDetailsState extends State<CategoryDetails> {
           );
         }
         var sourcesList = snapshot.data?.sourcesList ?? [];
-        return SourceTabWidget(sourcesList:sourcesList,category: widget.category,);
+        return SourceTabWidget(sourcesList:sourcesList,category: widget.category,newsList: [],);
       },
     );
   }
