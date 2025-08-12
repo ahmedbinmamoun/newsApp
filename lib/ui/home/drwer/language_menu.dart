@@ -4,7 +4,7 @@ class LanguageMenu extends StatelessWidget {
   final bool isEnglish;
   final Function(bool) onLanguageChanged;
 
-  const LanguageMenu({
+  const LanguageMenu({super.key, 
     required this.isEnglish,
     required this.onLanguageChanged,
   });

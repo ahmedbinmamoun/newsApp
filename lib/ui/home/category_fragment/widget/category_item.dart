@@ -17,7 +17,8 @@ class CategoryItem extends StatelessWidget {
     var height = MediaQuery.of(context).size.height;
     bool isEven = index % 2 == 0;
     var appLanguageProvider = Provider.of<AppLanguageProvider>(context);
-    return Expanded(
+    return SizedBox(
+      width: width,
       child: Stack(
         alignment: isEven ? Alignment.bottomRight : Alignment.bottomLeft,
         children: [

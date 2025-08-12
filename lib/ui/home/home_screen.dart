@@ -10,7 +10,7 @@ import 'package:news/ui/home/widget/search_widget.dart';
 import 'package:news/utils/app_assests.dart';
 
 class HomeScreen extends StatefulWidget {
-   HomeScreen({super.key});
+   const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -75,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   
                 });
               },
-               icon: Image.asset(AppAssests.searchIcon))
+               icon: Image.asset(AppAssests.searchIcon,color: Theme.of(context).indicatorColor,))
           ],
       ),
 

@@ -4,7 +4,7 @@ class ThemeMenu extends StatelessWidget{
   final ThemeMode themeMode;
   final Function(ThemeMode) onThemeChanged;
 
-  const ThemeMenu({
+  const ThemeMenu({super.key, 
     required this.themeMode,
     required this.onThemeChanged,
   });
