@@ -7,6 +7,9 @@ class AppTheme {
     primaryColor: AppColors.whiteColor,
     indicatorColor: AppColors.blackColor,
     scaffoldBackgroundColor: AppColors.whiteColor,
+    progressIndicatorTheme: ProgressIndicatorThemeData(
+      color: AppColors.greyColor
+    ),
     appBarTheme: AppBarTheme(
       backgroundColor: AppColors.whiteColor,
       surfaceTintColor: AppColors.transparentColor,
@@ -28,6 +31,9 @@ class AppTheme {
     primaryColor: AppColors.blackColor,
     indicatorColor: AppColors.whiteColor,
     scaffoldBackgroundColor: AppColors.blackColor,
+     progressIndicatorTheme: ProgressIndicatorThemeData(
+      color: AppColors.greyColor
+    ),
     appBarTheme: AppBarTheme(
       backgroundColor: AppColors.blackColor,
       surfaceTintColor: AppColors.transparentColor,

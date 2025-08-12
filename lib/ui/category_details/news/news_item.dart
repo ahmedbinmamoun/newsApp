@@ -42,9 +42,7 @@ class NewsItem extends StatelessWidget {
                 imageUrl: news.urlToImage ?? '',
                 placeholder:
                     (context, url) => Center(
-                      child: CircularProgressIndicator(
-                        color: AppColors.greyColor,
-                      ),
+                      child: CircularProgressIndicator(),
                     ),
                 errorWidget: (context, url, error) => Icon(Icons.error),
               ),
