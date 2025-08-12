@@ -1,9 +1,12 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:news/api/api_manager.dart';
 import 'package:news/model/SourseResponse.dart';
 import 'package:news/model/category.dart';
 import 'package:news/ui/category_details/source/source_tab_widget.dart';
 import 'package:news/utils/app_colors.dart';
+import 'package:quickalert/quickalert.dart';
+import 'package:quickalert/widgets/quickalert_dialog.dart';
 
 class CategoryDetails extends StatefulWidget {
   Category category;
@@ -33,56 +36,48 @@ class _CategoryDetailsState extends State<CategoryDetails> {
             child: CircularProgressIndicator(),
           );
         } else if (snapshot.hasError) {
-          return Center(
-            child: Column(
-              children: [
-                Text(
-                  'something went wrong..',
-                  style: Theme.of(context).textTheme.labelMedium,
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    _sourcesFuture = ApiManager.getSources(widget.category.id);
-                    setState(() {
-                      
-                    });
-                  },
-                  child: Text(
-                    'Try Again',
-                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                      color: Theme.of(context).primaryColor
-                    ),
-                  ),
-                ),
-              ],
-            ),
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+          
+             QuickAlert.show(
+              context: context,
+               type: QuickAlertType.error,
+               title: context.tr('error'),
+               text: context.tr('something_went_wrong'),
+               confirmBtnText: context.tr('okay'),
+               confirmBtnColor: AppColors.blackColor,
+               onConfirmBtnTap: () {
+               _sourcesFuture = ApiManager.getSources(widget.category.id);
+                 Navigator.pop(context);
+                 setState(() {
+                   
+                 });
+               },
+               );
+
+          },);
+          return Container(
+            color: Theme.of(context).primaryColor,
           );
         } else if (snapshot.data?.status != 'ok') {
-          return Center(
-            child: Column(
-              children: [
-                Text(
-                  snapshot.data!.message!,
-                  style: Theme.of(context).textTheme.labelMedium,
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    _sourcesFuture = ApiManager.getSources(widget.category.id);
-                    setState(() {
-                      
-                    });
-                  },
-                  child: Text(
-                    'Try Again',
-                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                      color: Theme.of(context).primaryColor
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          );
-        }
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+          
+             QuickAlert.show(
+              context: context,
+               type: QuickAlertType.error,
+               title: context.tr('error'),
+               text: context.tr('something_went_wrong'),
+               confirmBtnColor: AppColors.blackColor,
+               onConfirmBtnTap: () {
+               _sourcesFuture = ApiManager.getSources(widget.category.id);
+                 Navigator.pop(context);
+                 setState(() {
+                   
+                 });
+               },
+               );
+
+          },);
+          }
         var sourcesList = snapshot.data?.sourcesList ?? [];
         return SourceTabWidget(sourcesList:sourcesList,category: widget.category,newsList: [],);
       },
