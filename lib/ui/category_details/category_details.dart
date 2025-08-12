@@ -30,7 +30,7 @@ class _CategoryDetailsState extends State<CategoryDetails> {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(
-            child: CircularProgressIndicator(color: AppColors.greyColor),
+            child: CircularProgressIndicator(),
           );
         } else if (snapshot.hasError) {
           return Center(
