@@ -44,6 +44,7 @@ dependencies:
   timeago: ^3.7.1
   flutter_slider_drawer: ^3.0.2
   url_launcher: ^6.3.2
+  quickalert: ^1.1.0
 
 dev_dependencies:
   flutter_test:
