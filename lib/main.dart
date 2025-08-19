@@ -1,10 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news/provider/app_language_provider.dart';
 import 'package:news/provider/app_theme_provider.dart';
 import 'package:news/ui/home/home_screen.dart';
 import 'package:news/utils/app_routes.dart';
 import 'package:news/utils/app_theme.dart';
+import 'package:news/utils/my_bloc_observer.dart';
 import 'package:provider/provider.dart';
 
 void main() async{
@@ -15,6 +17,7 @@ void main() async{
   await appLanguageProvider.loadLocale();
   final appThemeProvider = AppThemeProvider();
   await appThemeProvider.loadTheme();
+   Bloc.observer = MyBlocObserver();
   runApp(
     
     EasyLocalization(

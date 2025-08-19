@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:news/model/NewsResponse.dart';
 import 'package:news/model/category.dart';
-import 'package:news/ui/category_details/category_details.dart';
+import 'package:news/ui/category_details/sources_details.dart';
 import 'package:news/ui/category_details/news/news_item.dart';
 import 'package:news/ui/home/category_fragment/category_fragment.dart';
 import 'package:news/ui/home/drwer/app_drawer.dart';
@@ -92,7 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
         )
       : selectedCategory == null
           ? CategoryFragment(onCategoryItemClick: onCategoryItemClick)
-          : CategoryDetails(category: selectedCategory!),
+          : SourceDetails(category: selectedCategory!),
 ),
       
     );
