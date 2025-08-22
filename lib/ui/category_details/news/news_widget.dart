@@ -1,11 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news/api/api_manager.dart';
-import 'package:news/model/NewsResponse.dart';
+import 'package:news/di/di.dart';
 import 'package:news/model/SourseResponse.dart';
 import 'package:news/model/category.dart';
-import 'package:news/pagination/news_pagination_manager.dart';
 import 'package:news/ui/category_details/news/cubit/news_states.dart';
 import 'package:news/ui/category_details/news/cubit/news_view_model.dart';
 import 'package:news/ui/category_details/news/news_item.dart';
@@ -14,140 +12,89 @@ import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
 
 class NewsWidget extends StatefulWidget {
-  Source source;
-  Category? category;
-   NewsWidget({super.key, required this.source});
+  final Source source;
+  final Category? category;
+
+  const NewsWidget({super.key, required this.source, this.category});
 
   @override
   State<NewsWidget> createState() => _NewsWidgetState();
 }
 
 class _NewsWidgetState extends State<NewsWidget> {
-  late Future<NewsResponse?> _newsFuture;
-  final NewsPaginationManager paginationManager = NewsPaginationManager(pageSize: 20);
   final ScrollController scrollController = ScrollController();
-  bool isLoading = false; 
-  List<News> articales = []; 
-  NewsViewModel viewModel = NewsViewModel();
-  
+  late NewsViewModel viewModel;
+
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    // _newsFuture = ApiManager.getNewsBySourceId(widget.source.id?? '');
-    loadMore();
+    viewModel = NewsViewModel(newsRepository: injectNewsRepository());
+    viewModel.loadInitialNews(widget.source.id ?? '');
+
     scrollController.addListener(() {
-      if (scrollController.position.pixels >= scrollController.position.maxScrollExtent - 20) {
-        loadMore();
+      if (scrollController.position.pixels >= scrollController.position.maxScrollExtent - 100) {
+        viewModel.loadMoreNews(widget.source.id ?? '');
       }
-    },);
-    viewModel.getNewsBySourceId(widget.source.id ?? '');
-
-  }
-  
-
-  @override
-void didUpdateWidget(covariant NewsWidget oldWidget) {
-  super.didUpdateWidget(oldWidget);
-
-  if (oldWidget.source.id != widget.source.id) {
-    paginationManager.reset();
-    articales.clear();
-    loadMore();
-    viewModel.getNewsBySourceId(widget.source.id ?? '');
-  }
-}
-
-
-  Future<void> loadMore() async{
-    if(isLoading)return;
-    setState(() {
-      isLoading = true;
-    });
-    var newsArticales = await paginationManager.fetchNextPage(widget.source.id ?? '');
-    setState(() {
-      articales = newsArticales;
-      isLoading = false;
     });
   }
+
   @override
-Widget build(BuildContext context) {
-  
-  return BlocBuilder<NewsViewModel,NewsStates>(
-    bloc: viewModel,
-    builder: (context, state) {
-      if(state is NewsErrorState){
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          
-             QuickAlert.show(
+  void didUpdateWidget(covariant NewsWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.source.id != widget.source.id) {
+      viewModel.reset();
+      viewModel.loadInitialNews(widget.source.id ?? '');
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<NewsViewModel, NewsStates>(
+      bloc: viewModel,
+      builder: (context, state) {
+        if (state is NewsLoadingState) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (state is NewsErrorState) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            QuickAlert.show(
               context: context,
-               type: QuickAlertType.error,
-               title: context.tr('error'),
-               text: context.tr(state.errorMessage),
-               confirmBtnText: context.tr('try_again'),
-               confirmBtnColor: AppColors.blackColor,
-               onConfirmBtnTap: () {
-                viewModel.getNewsBySourceId(widget.source.id ?? '');
-                 Navigator.pop(context);
-                 setState(() {
-                   
-                 });
-               },
-               );
-
-          },);
-          return Container(
-            color: Theme.of(context).primaryColor,
-          );
-      }else if(state is NewsSuccessState){
-     return   RefreshIndicator(
-          onRefresh: () async {
-            paginationManager.reset();
-            await loadMore();
-          },
-          child: ListView.builder(
-            controller: scrollController,
-            itemCount: articales.length + 1,
-            itemBuilder: (context, index) {
-              if (index == articales.length) {
-                return isLoading
-                    ? Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Center(child: CircularProgressIndicator()),
-                      )
-                    : SizedBox();
-              }
-              return NewsItem(news: articales[index]);
+              type: QuickAlertType.error,
+              title: context.tr('error'),
+              text: context.tr(state.errorMessage),
+              confirmBtnText: context.tr('try_again'),
+              confirmBtnColor: AppColors.blackColor,
+              onConfirmBtnTap: () {
+                Navigator.pop(context);
+                viewModel.loadInitialNews(widget.source.id ?? '');
+              },
+            );
+          });
+          return Container();
+        } else if (state is NewsSuccessState) {
+          final articles = state.newsList;
+          return RefreshIndicator(
+            onRefresh: () async {
+              viewModel.reset();
+              await viewModel.loadInitialNews(widget.source.id ?? '');
             },
-          ),
-        );
-      }else{
-       return Center(child: CircularProgressIndicator());
-      }
-    },
+            child: ListView.builder(
+              controller: scrollController,
+              itemCount: articles.length + 1,
+              itemBuilder: (context, index) {
+                if (index == articles.length) {
+                  return const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Center(child: CircularProgressIndicator()),
+                  );
+                }
+                return NewsItem(news: articles[index]);
+              },
+            ),
+          );
+        }
+
+        return const SizedBox();
+      },
     );
-  // articales.isEmpty && isLoading
-  //     ? Center(child: CircularProgressIndicator())
-  //     : RefreshIndicator(
-  //         onRefresh: () async {
-  //           paginationManager.reset();
-  //           await loadMore();
-  //         },
-  //         child: ListView.builder(
-  //           controller: scrollController,
-  //           itemCount: articales.length + 1,
-  //           itemBuilder: (context, index) {
-  //             if (index == articales.length) {
-  //               return isLoading
-  //                   ? Padding(
-  //                       padding: const EdgeInsets.all(8.0),
-  //                       child: Center(child: CircularProgressIndicator()),
-  //                     )
-  //                   : SizedBox();
-  //             }
-  //             return NewsItem(news: articales[index]);
-  //           },
-  //         ),
-  //       );
-}
+  }
 }
