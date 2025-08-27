@@ -1,12 +1,18 @@
+import 'dart:io';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/adapters.dart';
+import 'package:news/model/source_response.dart';
 import 'package:news/provider/app_language_provider.dart';
 import 'package:news/provider/app_theme_provider.dart';
 import 'package:news/ui/home/home_screen.dart';
 import 'package:news/utils/app_routes.dart';
 import 'package:news/utils/app_theme.dart';
 import 'package:news/utils/my_bloc_observer.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 
 void main() async{
@@ -18,6 +24,11 @@ void main() async{
   final appThemeProvider = AppThemeProvider();
   await appThemeProvider.loadTheme();
    Bloc.observer = MyBlocObserver();
+   final Directory appDocumentsDir = await getApplicationDocumentsDirectory();
+   Hive.init(appDocumentsDir.path);
+   Hive.registerAdapter(SourceAdapter());
+   Hive.registerAdapter(SourceResponseAdapter());
+
   runApp(
     
     EasyLocalization(
@@ -53,6 +64,8 @@ class MyApp extends StatelessWidget {
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: appThemeProvider.appTheme,
+      themeAnimationCurve: Curves.fastOutSlowIn,
+      themeAnimationDuration: Duration(milliseconds: 3000),
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: Locale(languageProvider.appLanguage),

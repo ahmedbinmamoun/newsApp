@@ -1,4 +1,3 @@
-import 'package:news/api/api_manager.dart';
 import 'package:news/data/repository/news/repository/news_repository.dart';
 import 'package:news/model/NewsResponse.dart';
 

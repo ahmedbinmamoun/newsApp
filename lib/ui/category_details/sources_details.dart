@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news/api/api_manager.dart';
 import 'package:news/di/di.dart';
-import 'package:news/model/SourseResponse.dart';
+import 'package:news/model/source_response.dart';
 import 'package:news/model/category.dart';
 import 'package:news/ui/category_details/cubit/sources_states.dart';
 import 'package:news/ui/category_details/cubit/sources_view_model.dart';
@@ -23,7 +23,7 @@ class SourceDetails extends StatefulWidget {
 }
 
 class _SourceDetailsState extends State<SourceDetails> {
-  late Future<SourseResponse?> _sourcesFuture;
+  late Future<SourceResponse?> _sourcesFuture;
   SourcesViewModel viewModel = SourcesViewModel(sourceRepository: injectSourceRepository());
   @override
   void initState() {
@@ -69,59 +69,6 @@ class _SourceDetailsState extends State<SourceDetails> {
         }
       },
       );
-    // FutureBuilder<SourseResponse?>(
-    //   future: _sourcesFuture,
-    //   builder: (context, snapshot) {
-    //     if (snapshot.connectionState == ConnectionState.waiting) {
-    //       return Center(
-    //         child: CircularProgressIndicator(),
-    //       );
-    //     } else if (snapshot.hasError) {
-    //       WidgetsBinding.instance.addPostFrameCallback((_) {
-          
-    //          QuickAlert.show(
-    //           context: context,
-    //            type: QuickAlertType.error,
-    //            title: context.tr('error'),
-    //            text: context.tr('something_went_wrong'),
-    //            confirmBtnText: context.tr('okay'),
-    //            confirmBtnColor: AppColors.blackColor,
-    //            onConfirmBtnTap: () {
-    //            _sourcesFuture = ApiManager.getSources(widget.category.id);
-    //              Navigator.pop(context);
-    //              setState(() {
-                   
-    //              });
-    //            },
-    //            );
 
-    //       },);
-    //       return Container(
-    //         color: Theme.of(context).primaryColor,
-    //       );
-    //     } else if (snapshot.data?.status != 'ok') {
-    //       WidgetsBinding.instance.addPostFrameCallback((_) {
-          
-    //          QuickAlert.show(
-    //           context: context,
-    //            type: QuickAlertType.error,
-    //            title: context.tr('error'),
-    //            text: context.tr('something_went_wrong'),
-    //            confirmBtnColor: AppColors.blackColor,
-    //            onConfirmBtnTap: () {
-    //            _sourcesFuture = ApiManager.getSources(widget.category.id);
-    //              Navigator.pop(context);
-    //              setState(() {
-                   
-    //              });
-    //            },
-    //            );
-
-    //       },);
-    //       }
-    //     var sourcesList = snapshot.data?.sourcesList ?? [];
-    //     return SourceTabWidget(sourcesList:sourcesList,category: widget.category,newsList: [],);
-    //   },
-    // );
   }
 }

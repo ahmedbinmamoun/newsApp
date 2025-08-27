@@ -1,6 +1,6 @@
-import 'package:news/model/SourseResponse.dart';
+import 'package:news/model/source_response.dart';
 
 abstract class SourceRemoteDataSource {
 
-  Future<SourseResponse?> getSourcees(String categoryId);
+  Future<SourceResponse?> getSourcees(String categoryId);
 }

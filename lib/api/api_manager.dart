@@ -4,10 +4,10 @@ import 'package:http/http.dart' as http;
 import 'package:news/api/api_constants.dart';
 import 'package:news/api/end_points.dart';
 import 'package:news/model/NewsResponse.dart';
-import 'package:news/model/SourseResponse.dart';
+import 'package:news/model/source_response.dart';
 
 class ApiManager {
-   Future<SourseResponse?> getSources(String categoryId) async {
+   Future<SourceResponse?> getSources(String categoryId) async {
     Uri url = Uri.https(ApiConstants.baseUrl, EndPoints.sourceApi, {
       'apiKey': ApiConstants.apiKey,
       'category' : categoryId,
@@ -16,7 +16,7 @@ class ApiManager {
       var response = await http.get(url);
       var responseBody = response.body;
       var json = jsonDecode(responseBody);
-      return SourseResponse.fromJson(json);
+      return SourceResponse.fromJson(json);
     } catch (e) {
       rethrow;
     }
