@@ -14,7 +14,7 @@ class SourceAdapter extends TypeAdapter<Source> {
   Source read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
-      for (var i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Source(
       id: fields[0] as String?,
@@ -46,6 +46,16 @@ class SourceAdapter extends TypeAdapter<Source> {
       ..writeByte(6)
       ..write(obj.country);
   }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is SourceAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
 }
 
 class SourceResponseAdapter extends TypeAdapter<SourceResponse> {
@@ -56,7 +66,7 @@ class SourceResponseAdapter extends TypeAdapter<SourceResponse> {
   SourceResponse read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
-      for (var i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return SourceResponse(
       status: fields[0] as String?,
@@ -79,4 +89,14 @@ class SourceResponseAdapter extends TypeAdapter<SourceResponse> {
       ..writeByte(3)
       ..write(obj.message);
   }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is SourceResponseAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
 }
