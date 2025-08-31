@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news/di/di.dart';
+import 'package:news/di/di_injectable.dart';
 import 'package:news/model/source_response.dart';
 import 'package:news/model/category.dart';
 import 'package:news/ui/category_details/news/cubit/news_states.dart';
@@ -28,7 +29,7 @@ class _NewsWidgetState extends State<NewsWidget> {
   @override
   void initState() {
     super.initState();
-    viewModel = NewsViewModel(newsRepository: injectNewsRepository());
+    viewModel = getIt<NewsViewModel>();
     viewModel.loadInitialNews(widget.source.id ?? '');
 
     scrollController.addListener(() {

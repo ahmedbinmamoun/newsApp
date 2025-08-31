@@ -1,4 +1,4 @@
-import 'package:news/model/NewsResponse.dart';
+import 'package:news/model/news_response.dart';
 
 abstract class NewsStates {}
 class NewsLoadingState extends NewsStates{}

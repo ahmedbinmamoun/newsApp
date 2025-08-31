@@ -1,5 +1,5 @@
 import 'package:news/data/repository/news/repository/news_repository.dart';
-import 'package:news/model/NewsResponse.dart';
+import 'package:news/model/news_response.dart';
 
 class NewsPaginationManager {
   int _page = 1;

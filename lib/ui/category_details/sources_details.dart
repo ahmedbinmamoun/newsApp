@@ -1,8 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news/api/api_manager.dart';
 import 'package:news/di/di.dart';
+import 'package:news/di/di_injectable.dart';
 import 'package:news/model/source_response.dart';
 import 'package:news/model/category.dart';
 import 'package:news/ui/category_details/cubit/sources_states.dart';
@@ -24,7 +24,7 @@ class SourceDetails extends StatefulWidget {
 
 class _SourceDetailsState extends State<SourceDetails> {
   late Future<SourceResponse?> _sourcesFuture;
-  SourcesViewModel viewModel = SourcesViewModel(sourceRepository: injectSourceRepository());
+  SourcesViewModel viewModel = getIt<SourcesViewModel>();
   @override
   void initState() {
     // TODO: implement initState

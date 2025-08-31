@@ -4,7 +4,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
-import 'package:hive_flutter/adapters.dart';
+import 'package:news/di/di_injectable.dart';
+import 'package:news/model/news_response.dart';
 import 'package:news/model/source_response.dart';
 import 'package:news/provider/app_language_provider.dart';
 import 'package:news/provider/app_theme_provider.dart';
@@ -28,7 +29,9 @@ void main() async{
    Hive.init(appDocumentsDir.path);
    Hive.registerAdapter(SourceAdapter());
    Hive.registerAdapter(SourceResponseAdapter());
-
+   Hive.registerAdapter(NewsAdapter());
+   Hive.registerAdapter(NewsResponseAdapter());
+    configureDependencies();  
   runApp(
     
     EasyLocalization(

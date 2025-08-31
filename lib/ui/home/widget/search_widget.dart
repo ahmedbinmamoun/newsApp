@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:news/api/api_manager.dart';
-import 'package:news/model/NewsResponse.dart';
+import 'package:news/model/news_response.dart';
 import 'package:news/ui/home/widget/custom_text_form_feild.dart';
 import 'package:news/utils/app_assests.dart';
 

@@ -1,7 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:news/data/repository/sources/repository/source_repository.dart';
 import 'package:news/ui/category_details/cubit/sources_states.dart';
 
+@injectable
 class SourcesViewModel extends Cubit<SourceStates>{
   SourceRepository sourceRepository;
   SourcesViewModel({required this.sourceRepository}):super(SourceLoadingState());
