@@ -1,0 +1,49 @@
+import 'package:flutter/material.dart';
+
+class LanguageMenu extends StatelessWidget {
+  final bool isEnglish;
+  final Function(bool) onLanguageChanged;
+
+  const LanguageMenu({super.key, 
+    required this.isEnglish,
+    required this.onLanguageChanged,
+  });
+
+  @override
+  double get height => 80;
+
+  @override
+  Widget build(BuildContext context) {
+    return PopupMenuItem(
+      value: 'language',
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text('Language'),
+          const SizedBox(height: 8),
+          Row(
+            children: [
+              Radio<bool>(
+                value: true,
+                groupValue: isEnglish,
+                onChanged: (bool? value) {
+                  if (value != null) onLanguageChanged(value);
+                },
+              ),
+              const Text('English'),
+              const SizedBox(width: 16),
+              Radio<bool>(
+                value: false,
+                groupValue: isEnglish,
+                onChanged: (bool? value) {
+                  if (value != null) onLanguageChanged(value);
+                },
+              ),
+              const Text('العربية'),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
