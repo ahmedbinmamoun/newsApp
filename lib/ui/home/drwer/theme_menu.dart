@@ -19,8 +19,8 @@ class ThemeMenu extends StatelessWidget{
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Theme'),
-          SizedBox(height: 8),
+          const Text('Theme'),
+          const SizedBox(height: 8),
           Row(
             children: [
               Radio<ThemeMode>(
@@ -30,8 +30,8 @@ class ThemeMenu extends StatelessWidget{
                   if (value != null) onThemeChanged(value);
                 },
               ),
-              Text('Light'),
-              SizedBox(width: 16),
+              const Text('Light'),
+              const SizedBox(width: 16),
               Radio<ThemeMode>(
                 value: ThemeMode.dark,
                 groupValue: themeMode,
@@ -39,7 +39,7 @@ class ThemeMenu extends StatelessWidget{
                   if (value != null) onThemeChanged(value);
                 },
               ),
-              Text('Dark'),
+              const Text('Dark'),
             ],
           ),
         ],

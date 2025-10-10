@@ -98,8 +98,8 @@ class SourceResponse extends HiveObject {
       SourceResponse(
         status: status ?? this.status,
         sourcesList: sourcesList ?? this.sourcesList,
-        code: code ?? this.code,
-        message: message ?? this.message,
+        code: code ?? code,
+        message: message ?? message,
       );
 
   Map<String, dynamic> toJson() => {

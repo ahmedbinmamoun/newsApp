@@ -29,7 +29,7 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
       ),
 
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
         color: Theme.of(context).indicatorColor,
       ),
       child: Column(
@@ -40,12 +40,12 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
             child: CachedNetworkImage(
               imageUrl: widget.news.urlToImage ?? '',
               placeholder:
-                  (context, url) => Center(
-                    child: CircularProgressIndicator(
+                  (context, url) => const Center(
+                    child:  CircularProgressIndicator(
                       color: AppColors.greyColor,
                     ),
                   ),
-              errorWidget: (context, url, error) => Icon(Icons.error),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
             ),
           ),
           SizedBox(height: height * 0.02),
@@ -64,7 +64,6 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
             onTap: () async {
               final Uri uri = Uri.parse(widget.news.url!);
               if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
-                print("Could not launch $uri");
               }
             },
             child: Container(

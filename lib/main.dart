@@ -19,7 +19,7 @@ import 'package:provider/provider.dart';
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
-  await Future.delayed(Duration(milliseconds: 1500));
+  await Future.delayed(const Duration(milliseconds: 100));
   final appLanguageProvider = AppLanguageProvider();
   await appLanguageProvider.loadLocale();
   final appThemeProvider = AppThemeProvider();
@@ -35,16 +35,16 @@ void main() async{
   runApp(
     
     EasyLocalization(
-      supportedLocales: [Locale('en'), Locale('ar')],
+      supportedLocales: const [ Locale('en'), Locale('ar')],
       path: 'assets/translations',
-      fallbackLocale: Locale('en'),
+      fallbackLocale: const Locale('en'),
       
       child: MultiProvider(
         providers: [
           ChangeNotifierProvider.value(value: appLanguageProvider),
           ChangeNotifierProvider.value(value: appThemeProvider),
         ],
-        child: MyApp())
+        child: const MyApp())
     ),
     
   );
@@ -62,13 +62,13 @@ class MyApp extends StatelessWidget {
       
       initialRoute: AppRoute.homeRouteName,
       routes: {
-        AppRoute.homeRouteName : (context) => HomeScreen(),
+        AppRoute.homeRouteName : (context) => const HomeScreen(),
       },
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: appThemeProvider.appTheme,
       themeAnimationCurve: Curves.fastOutSlowIn,
-      themeAnimationDuration: Duration(milliseconds: 3000),
+      themeAnimationDuration: const Duration(milliseconds: 100),
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: Locale(languageProvider.appLanguage),

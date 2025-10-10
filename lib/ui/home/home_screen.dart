@@ -28,11 +28,11 @@ class _HomeScreenState extends State<HomeScreen> {
       drawer: isSearching ? null : AppDrawer(onGotoHomeClick: onGotoHomeClick),
       appBar: AppBar(
         title: AnimatedSwitcher(
-          duration: Duration(milliseconds: 600),
+          duration: const Duration(milliseconds: 600),
           transitionBuilder: (child, animation) {
             return SlideTransition(
               position: Tween<Offset>(
-                begin: Offset(1, 0),
+                begin: const Offset(1, 0),
                 end: Offset.zero
               ).animate(animation),
               child: FadeTransition(opacity: animation, child: child,),

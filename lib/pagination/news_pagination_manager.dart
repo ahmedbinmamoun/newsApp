@@ -8,7 +8,7 @@ class NewsPaginationManager {
   NewsRepository newsRepository;
 
   final int pageSize;
-  List<News> _articles = [];
+  final List<News> _articles = [];
 
   NewsPaginationManager({this.pageSize = 20, required this.newsRepository});
 

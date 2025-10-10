@@ -80,7 +80,7 @@ class ApiManager {
     int pageSize = 20,
   }) async{
    try {
-     var response = await dio.get(EndPoints.NewsApi,
+     var response = await dio.get(EndPoints.newsApi,
      queryParameters: {
       'sources': sourceId,
       'page': page.toString(),
@@ -123,7 +123,7 @@ class ApiManager {
   }
 
   static Future<NewsResponse?> searchNews(String query) async {
-    Uri url = Uri.https(ApiConstants.baseUrl, EndPoints.NewsApi, {
+    Uri url = Uri.https(ApiConstants.baseUrl, EndPoints.newsApi, {
       'apiKey': ApiConstants.apiKey,
       'q': query,
     });

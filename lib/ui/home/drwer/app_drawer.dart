@@ -65,7 +65,7 @@ class AppDrawer extends StatelessWidget {
                   style: Theme.of(context).textTheme.labelMedium,
                   isExpanded: true,
                   dropdownColor: Theme.of(context).primaryColor,
-                  underline: SizedBox(),
+                  underline: const SizedBox(),
                   items: [
                     context.tr('dark'),
                    context.tr('light')]

@@ -3,7 +3,6 @@ import 'package:injectable/injectable.dart';
 import 'package:news/data/repository/news/data_source/local/news_local_data_source.dart';
 import 'package:news/data/repository/news/data_source/remote/news_remote_data_source.dart';
 import 'package:news/data/repository/news/repository/news_repository.dart';
-import 'package:news/data/repository/sources/data_sources/local/source_local_data_source.dart';
 import 'package:news/model/news_response.dart';
 
 @Injectable(as: NewsRepository)

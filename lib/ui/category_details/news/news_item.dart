@@ -41,10 +41,14 @@ class NewsItem extends StatelessWidget {
               child: CachedNetworkImage(
                 imageUrl: news.urlToImage ?? '',
                 placeholder:
-                    (context, url) => Center(
+                    (context, url) => const Center(
                       child: CircularProgressIndicator(),
                     ),
-                errorWidget: (context, url, error) => Icon(Icons.error),
+                errorWidget: (context, url, error) =>  SizedBox(
+                  width: width,
+                  height: height * 0.3,
+                  child:const Icon(Icons.error),
+                ),
               ),
             ),
             SizedBox(height: height * 0.01),

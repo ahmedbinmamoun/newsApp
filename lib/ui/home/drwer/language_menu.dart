@@ -19,8 +19,8 @@ class LanguageMenu extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Language'),
-          SizedBox(height: 8),
+          const Text('Language'),
+          const SizedBox(height: 8),
           Row(
             children: [
               Radio<bool>(
@@ -30,8 +30,8 @@ class LanguageMenu extends StatelessWidget {
                   if (value != null) onLanguageChanged(value);
                 },
               ),
-              Text('English'),
-              SizedBox(width: 16),
+              const Text('English'),
+              const SizedBox(width: 16),
               Radio<bool>(
                 value: false,
                 groupValue: isEnglish,
@@ -39,7 +39,7 @@ class LanguageMenu extends StatelessWidget {
                   if (value != null) onLanguageChanged(value);
                 },
               ),
-              Text('العربية'),
+              const Text('العربية'),
             ],
           ),
         ],

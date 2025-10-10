@@ -1,16 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news/di/di.dart';
 import 'package:news/di/di_injectable.dart';
-import 'package:news/model/source_response.dart';
 import 'package:news/model/category.dart';
 import 'package:news/ui/category_details/cubit/sources_states.dart';
 import 'package:news/ui/category_details/cubit/sources_view_model.dart';
 import 'package:news/ui/category_details/source/source_tab_widget.dart';
 import 'package:news/utils/app_colors.dart';
 import 'package:quickalert/quickalert.dart';
-import 'package:quickalert/widgets/quickalert_dialog.dart';
 
 class SourceDetails extends StatefulWidget {
   Category category;
@@ -23,11 +20,9 @@ class SourceDetails extends StatefulWidget {
 }
 
 class _SourceDetailsState extends State<SourceDetails> {
-  late Future<SourceResponse?> _sourcesFuture;
   SourcesViewModel viewModel = getIt<SourcesViewModel>();
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     // _sourcesFuture = ApiManager.getSources(widget.category.id);
     viewModel.getSources(widget.category.id);
@@ -38,7 +33,7 @@ class _SourceDetailsState extends State<SourceDetails> {
       bloc: viewModel,
       builder: (context, state) {
         if (state is SourceSuccessState) {
-          return SourceTabWidget(sourcesList:state.sourcesList,category: widget.category,newsList: [],);
+          return SourceTabWidget(sourcesList:state.sourcesList,category: widget.category,newsList: const [],);
         }else if(state is SourceErrorState){
           WidgetsBinding.instance.addPostFrameCallback((_) {
           
@@ -63,7 +58,7 @@ class _SourceDetailsState extends State<SourceDetails> {
             color: Theme.of(context).primaryColor,
           );
         }else{
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         }
