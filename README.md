@@ -1,14 +1,68 @@
-# newsApp
+<img width="1133" height="757" alt="image" src="https://github.com/user-attachments/assets/628dc293-443e-4158-b826-2ef77d8f12f3" />📰 NewsApp
 
-News App is a modern Flutter application that provides users with the latest news from various categories such as politics, technology, sports, health, and more. The app is designed with a clean UI, dark/light themes, and supports responsive layouts for mobile devices.
+NewsApp is a modern news application built with Flutter that delivers real-time headlines from multiple categories in a fast and clean user experience.
+The app focuses on simplicity and performance, allowing users to browse trending news, explore categories, and read articles in a smooth and responsive interface.
+Designed with scalable structure and modular components, making it easy to extend with new APIs and features.
 
-## 🔧 Getting Started
+## 🚀 Features
+- 🗞️ Latest headlines from live APIs
+- 📚 Multiple news categories
+- ⚡ Fast loading with pagination
+- 🔄 Pull-to-refresh support
+- 🎨 Clean and minimal UI
+- 📱 Responsive design for different screen sizes
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+## 🛠️ Tech Stack
+- Flutter (Dart)
+- REST API Integration
+- Provider (State Management)
+- Pagination / Infinite Scroll
+- Modular Folder Structure
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the [online documentation](https://docs.flutter.dev/), which offers tutorials, samples, guidance on mobile development, and a full API reference.
+## 📂 Project Structure
+```plaintext
+lib/
+├── api/                # API services & endpoints
+│
+├── data/
+│   └── repository/     # Data layer & repositories
+│
+├── di/                 # Dependency injection setup
+│
+├── model/              # Data models
+│
+├── pagination/         # Infinite scroll logic
+│
+├── provider/           # State management
+│
+├── ui/                 # Screens & pages
+│
+├── utils/              # Helpers & utilities
+│
+├── widget/             # Reusable UI components
+│
+└── main.dart           # App entry point
+```
+
+## 📸 Screenshots
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/628dc293-443e-4158-b826-2ef77d8f12f3" alt="App Preview" width="800"/>
+</p>
+
+
+## 🚀 Getting Started
+git clone https://github.com/ahmedbinmamoun/newsApp.git
+cd newsApp
+flutter pub get
+flutter run
+
+
+## 👨‍💻 Author
+Eng. Ahmed Mamoun
+Flutter Developer
+
+
+## ⭐ Support
+If you like this project, consider giving it a ⭐ on GitHub!
